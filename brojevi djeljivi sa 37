@@ -1,0 +1,55 @@
+<?php
+
+// zadatak02.php
+
+class Raspon
+{
+    function Od_Do($a, $b)
+    {
+        for($i=$a; $i<=$b; $i++)
+        {
+            echo $i . " ";
+        }
+    }
+
+    function Rand10_Od_Do($a, $b)
+    {
+        $ispisani_v = array();
+
+        for($i=1; $i<=10; $i++)
+        {
+            while(true)
+            {
+                $v = rand($a, $b);
+
+                if(!in_array($v, $ispisani_v))
+                {
+                    echo $v . " ";
+    
+                    $ispisani_v[] = $v;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    function Djeljivi37()
+    {
+        for($i=1; $i<=10000; $i++)
+        {
+            if($i % 37 == 0)
+            {
+                echo $i . " ";
+            }
+        }
+    }
+}
+
+$raspon = new Raspon();
+
+// $raspon->Rand10_Od_Do(10, 30);
+
+$raspon->Djeljivi37();
+
+?>
