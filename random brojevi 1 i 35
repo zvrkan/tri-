@@ -1,0 +1,25 @@
+<?php
+/*
+Napišite program koji od korisnika učitava broj N. 
+Pošaljite taj broj u funkciju te u funkciji generirajte i stavite 
+N jedinstvenih slučajnih brojeva između 1 i 35 u polje. Funkcija vraća to 
+polje kao rezultat. U glavnom programu ispišite sadržaj tog polja
+*/
+
+function generate()
+{
+    $random = rand(1, 35);
+    return $random;
+}
+
+$n = readline("Unesite broj (N): ");
+
+for ($i = 1; $i <= $n; $i++) 
+
+{
+    $random = generate();
+    echo $random;
+    echo "\n";
+}
+
+?>
