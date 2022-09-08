@@ -1,0 +1,106 @@
+<?php
+
+// zadatak01.php
+
+function getParkingPriceForHour($cijenik, $v_ulaz_h)
+{
+    $cijena_parkinga = 0;
+
+    foreach($cijenik as $sat => $cijena)
+    {
+        if((int)$v_ulaz_h >= (int)$sat)
+        {
+            $cijena_parkinga = $cijena;
+        }   
+    }
+
+    return $cijena_parkinga;
+}
+
+function calcParkingPriceFromTo($cijenik, $v_ulaz_h, $v_izlaz_h)
+{
+    $sveukupno = 0;
+
+    for($h=$v_ulaz_h; $h < $v_izlaz_h; $h++)
+    {
+        $cijena_parkinga = getParkingPriceForHour($cijenik, $h);
+
+        // echo "Cijena parkinga: " . $cijena_parkinga . "\n";
+
+        $sveukupno += $cijena_parkinga;
+    }
+
+    return array($sveukupno, $cijena_parkinga);
+}
+
+$cijenik = array();
+$cijenik["7"]  = 6;
+$cijenik["16"] = 3;
+$cijenik["22"] = 0;
+
+$vrijeme_ulaska = readline("Vrijeme ulaska: "); // 10:03
+$vrijeme_izlaska = readline("Vrijeme izlaska: "); // 11:45
+
+// Racunanje vremena trajanaj parkinga
+
+$vrijeme_ulaska_array = explode(":", $vrijeme_ulaska);
+
+$vrijeme_ulaska_h = (int)$vrijeme_ulaska_array[0];
+$vrijeme_ulaska_m = (int)$vrijeme_ulaska_array[1];
+
+$vrijeme_izlaska_array = explode(":", $vrijeme_izlaska);
+
+$vrijeme_izlaska_h = (int)$vrijeme_izlaska_array[0];
+$vrijeme_izlaska_m = (int)$vrijeme_izlaska_array[1];
+
+$v_ulaz_h = $vrijeme_ulaska_h;
+$v_izlaz_h = $vrijeme_izlaska_h;
+
+if($v_ulaz_h > $v_izlaz_h)
+{
+    $razlika_ponoc_h = 24 - $v_ulaz_h;
+    $razlika_ponoc_min = $razlika_ponoc_h * 60;
+
+    $vrijeme_ulaska_h = 0;
+}
+else
+{
+    $razlika_ponoc_min = 0;
+}
+
+$vrijeme_ulaska_h = $vrijeme_ulaska_h * 60;
+$vrijeme_izlaska_h = $vrijeme_izlaska_h * 60;
+
+$vrijeme_ulaska_min = $vrijeme_ulaska_h + $vrijeme_ulaska_m;
+$vrijeme_izlaska_min = $vrijeme_izlaska_h + $vrijeme_izlaska_m;
+
+$razlika_izlaz_ulaz = $vrijeme_izlaska_min - $vrijeme_ulaska_min + $razlika_ponoc_min;
+
+$razlika_izlaz_ulaz_h = (int)($razlika_izlaz_ulaz / 60);
+$razlika_izlaz_ulaz_m = $razlika_izlaz_ulaz - ($razlika_izlaz_ulaz_h * 60);
+
+echo "Trajanje parkinga: " . $razlika_izlaz_ulaz_h . " sat " . $razlika_izlaz_ulaz_m . " min\n";
+
+// Dohvacanje cijene parkinga
+$sveukupno = 0;
+
+if($v_ulaz_h > $v_izlaz_h)
+{
+    $result = calcParkingPriceFromTo($cijenik, $v_ulaz_h, 24);
+    $sveukupno += $result[0];
+
+    $v_ulaz_h = 0;
+}
+
+$result = calcParkingPriceFromTo($cijenik, $v_ulaz_h, $v_izlaz_h);
+$sveukupno += $result[0];
+$cijena_parkinga = $result[1];
+
+if($razlika_izlaz_ulaz_m >= 15)
+{
+    $sveukupno += $cijena_parkinga;  
+}
+
+echo "Total za naplatu: " . $sveukupno . " kn\n";
+
+?>
