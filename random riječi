@@ -1,6 +1,6 @@
 <?php
 
-// functions.php fali echooooooooo
+// functions.php fali echooooooooo -- nastavlja se na random riječi2
 
 function genRandWord()
 {
