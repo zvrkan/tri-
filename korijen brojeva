@@ -1,0 +1,24 @@
+<?php
+/*
+Napišite funkciju koja prima jedan cijeli broj i vraća njegov korijen. 
+U glavnom programu učitajte 5 brojeva od korisnika, za svaki od njih 
+pozovite funkciju te ispišite i broj i njegov 
+korijen kojeg vam vrati funkcija.
+*/
+
+function nadjiKorijen($broj)
+{
+    $rijesenje = sqrt($broj);
+    return $rijesenje;
+}
+
+for ($i = 1; $i <= 5; $i++) {
+    $broj = readline("Unesite broj: ");
+    $korijen = nadjiKorijen($broj);
+    echo "Vas broj je: " . $broj . " i njegov korijen je: " . $korijen;
+    echo "\n";
+}
+
+
+
+?>
