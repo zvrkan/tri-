@@ -1,0 +1,40 @@
+<?php
+/*
+Napišite funkciju koja prima broj N i vraća je li broj prost ili nije. 
+Pozovite funkciju za sve brojeve između 1.000 i 2.000 te ispišite samo one 
+proste. 
+Napomena: Prirodni broj n≥2 je prost ako i samo ako je djeljiv 
+samo s 1 i sa samim sobom.
+*/
+
+
+function getPrime($n)
+{
+    $count=0;  
+    for ( $i=1; $i <= $n; $i++)  
+    {  
+    if (($n % $i)==0)  
+    {  
+    $count++;  
+    }  
+    }  
+    if ($count < 3)  
+    {  
+    //echo "$n is a prime number.";
+    return $n;  
+    }
+
+
+}  
+
+for ($i = 1000; $i <= 2000; $i++) {
+    $prime = getPrime($i);
+    if($prime != "")
+    {
+        echo $prime;
+        echo "\n";
+    }
+}
+
+
+?>
