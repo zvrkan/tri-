@@ -1,0 +1,39 @@
+<?php
+
+// zadatak01.php
+
+include("functions.php");
+
+$rijec = genRandWord();
+
+$br_pokusaj = 0;
+$pogodjena_slova = array();
+
+while(true)
+{
+    $br_pokusaj++;
+
+    echo "\n";
+
+    $slovo = readline("Unesite slovo: ");
+
+    for($i=0; $i<strlen($rijec); $i++)
+    {
+        $rijec_slovo = $rijec[$i];
+
+        echo checkMatch($slovo, $rijec_slovo, $pogodjena_slova);
+    }
+
+    // Ispravna provjera da li su sva slova pogodjena
+    $br_pogodjenih = checkEnd($rijec, $pogodjena_slova);
+
+    if($br_pogodjenih == strlen($rijec))
+    {
+        break;
+    }
+}
+
+echo "\n";
+echo "GAME OVER, pogodili ste rijec u " . $br_pokusaj . " pokusaja.\n";
+
+?>
