@@ -1,0 +1,55 @@
+<?php
+
+// fali echo????
+
+function genRandWord()
+{
+    $rijeci = array("petak", "mrak", "auto", "ptica", "riba", 
+                "vlak", "som", "dan", "vilica", "kruh");
+
+    $k = rand(0, (count($rijeci)-1));
+
+    $rijec = $rijeci[$k];
+
+    return $rijec;
+}
+
+function checkMatch($s, $r, &$p)
+{
+    if($r == $s)
+    {
+        if(!in_array($r, $p))
+        {
+            $p[] = $r;
+        }
+
+        return $r . " ";
+    }
+    elseif(in_array($r, $p))
+    {
+        return $r . " ";
+    }
+    else
+    {
+        return "_ ";
+    }
+}
+
+function checkEnd($r, $p)
+{
+    $br_pogodjenih = 0;
+
+    for($i=0; $i<strlen($r); $i++)
+    {
+        $rijec_slovo = $r[$i];
+
+        if(in_array($rijec_slovo, $p))
+        {
+            $br_pogodjenih++;
+        }
+    }
+
+    return $br_pogodjenih;
+}
+
+?>
