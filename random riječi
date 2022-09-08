@@ -1,6 +1,6 @@
 <?php
 
-// fali echo????
+// functions.php fali echooooooooo
 
 function genRandWord()
 {
@@ -51,5 +51,7 @@ function checkEnd($r, $p)
 
     return $br_pogodjenih;
 }
+
+echo $r; 
 
 ?>
