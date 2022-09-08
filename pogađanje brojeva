@@ -1,0 +1,83 @@
+<?php
+
+function genRandNumber()
+{
+    $iskoristeni_brojevi = array();
+
+    $broj = rand(1, 9);
+
+    for($i=1; $i<=3; $i++)
+    {
+        while(true)
+        {
+            $b = rand(0, 9);
+            $br_ponavljanja = 0;
+
+            for($j=0; $j<strlen($broj); $j++)
+            {
+                if($b == $broj[$j])
+                {
+                    $br_ponavljanja++;
+                }
+            }
+
+            if($br_ponavljanja == 0)
+            {
+                $broj .= $b;
+                break;
+            }
+        }
+    }
+
+    return $broj;
+}
+
+function checkMatch($zamisljeni_broj, $broj)
+{
+    $broj_pogodjenih = 0;
+
+    for($j=0; $j<strlen($zamisljeni_broj); $j++)
+    {
+        $zb = $zamisljeni_broj[$j];
+        $b  = $broj[$j];
+
+        if($b == $zb)
+        {
+            $broj_pogodjenih++;
+        }
+    }
+
+    return $broj_pogodjenih; 
+}
+
+$zamisljeni_broj = genRandNumber();
+
+$br_pokusaja = 0;
+
+while(true)
+{
+    $br_pokusaja++;
+
+    echo "\n";
+    $broj = readline("Upisite 4-znamenkasti broj: ");
+
+    if(strlen($broj) == 4)
+    {
+        $broj_pogodjenih = checkMatch($zamisljeni_broj, $broj);
+
+        echo "Broj pogodjenih znamenik: " . $broj_pogodjenih . "\n";
+    
+        if($broj_pogodjenih == 4)
+        {
+            break;
+        }
+    }
+    else
+    {
+        echo "Morate upisati 4-znamenkasti broj. Pokusajte ponovo!\n";
+    }
+}
+
+echo "GAME OVER, pogodili ste broj u ".$br_pokusaja." pokusaja.";
+
+?>
