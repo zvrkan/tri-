@@ -1,0 +1,19 @@
+<?php
+/* funkcija koja prima dva cijela broja i vraća da li su OBA pozitivna*/
+
+$prvi = true;
+while ($prvi == true){
+    $prvi = readline ("Upišite jedan cijeli broj: ");
+    $drugi = readline ("Upišite jedan cijeli broj: ");
+    if($prvi < 0){
+        if ($drugi < 0){
+            echo "Nisu oba pozitivna";
+        }
+    }
+    else{
+        echo "Oba su pozitivna";
+    }
+    break; 
+}
+
+?>
